@@ -61,7 +61,7 @@
                                 <td><?php echo $row['lname']; ?></td>
                                 <td><?php echo $row['age']; ?></td>
                                 <td><?php echo $row['province']; ?></td>
-                                <td><a class="btn btn-primary" href="#">แก้ไข</td>
+                                <td><a class="btn btn-primary" href="form-update.php?id=<?php echo $row['id']; ?>">แก้ไข</td> <!-- ส่งค่า id ไปแบบ get -->
                                 <td><a class="btn btn-danger" href="php/delete.php?id=<?php echo $row['id']; ?>">ลบ</a></td> <!-- ส่งค่า id ไปแบบ get -->
                             </tr>
                             <?php $count++; } ?>
