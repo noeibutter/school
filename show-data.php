@@ -10,12 +10,11 @@
     // $row_ar = $result->fetch_array(); //เอามาทั้ง index key
     // debug($row_ar);
 
-    // $row_ac = $result->fetch_assoc(); //เอามาเฉพา key
+    // $row_ac = $result->fetch_assoc(); //เอามาเฉพาะ key
     // debug($row_ac);
 
-    // $row_rs = $result->fetch_result();
-    // debug($row_rs);
-
+    // $row_rw = $result->fetch_row(); //เอามาเฉพาะ index 
+    // debug($row_rw);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,6 +51,8 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <!-- $count เอามาโชว์ลำดับเริ่มจาก ลำดับที่ 1  -->
+                            <!-- while คือ คำสั่งให้มัน loop เรื่อยๆ จนกว่าจะไม่มีข้อมุลที่เรา fetch_assoc ออกมา -->
                             <?php $count = 1; while($row = $result->fetch_assoc()){ ?>
                             <tr>
                                 <td><?php echo $count; ?></td>
@@ -61,9 +62,10 @@
                                 <td><?php echo $row['lname']; ?></td>
                                 <td><?php echo $row['age']; ?></td>
                                 <td><?php echo $row['province']; ?></td>
-                                <td><a class="btn btn-primary" href="form-update.php?id=<?php echo $row['id']; ?>">แก้ไข</td> <!-- ส่งค่า id ไปแบบ get -->
-                                <td><a class="btn btn-danger" href="php/delete.php?id=<?php echo $row['id']; ?>">ลบ</a></td> <!-- ส่งค่า id ไปแบบ get -->
+                                <td><a class="btn btn-primary" href="form-update.php?id=<?php echo $row['id']; ?>">แก้ไข</td> <!-- ส่งค่า id ไปแบบ get เอาไว้ใช้เป็นเงื่อนไขในการ select ข้อมูลใน database -->
+                                <td><a class="btn btn-danger" href="php/delete.php?id=<?php echo $row['id']; ?>">ลบ</a></td> <!-- ส่งค่า id ไปแบบ get เอาไว้ใช้เป็นเงื่อนไขในการ ลบ ข้อมูลใน database-->
                             </tr>
+                            <!-- $count++ คือ ให้มันเพิ่มค่าเรื่อยๆ จนกว่าจะ loop เสร็จ -->
                             <?php $count++; } ?>
                         </tbody>
                     </table>

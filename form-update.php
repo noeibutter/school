@@ -1,10 +1,13 @@
 <?php
     require_once("php/config.php");
 
-    $id = $_GET['id'];
+    $id = $_GET['id']; // รับ id มากจาก การกดปุ่มแก้ไขของ user
     
-    $sql = "SELECT * FROM `student` WHERE `id` = '".$id."'";
+    $sql = "SELECT * FROM `student` WHERE `id` = '".$id."'"; //โค้ด sql เลือกข้อมูล
     $result = $conn->query($sql);
+
+    // ในกรณีที่เราแน่ใจว่าข้อมูลเราที่เรา query ออกมา มีแถวเดียวแน่นอน
+    // ให้ยัด fetch_assoc เข้าไปในตัวแปรได้เลยโดยไม่ต้องใช้ while
     $row = $result->fetch_assoc();
     
 ?>
@@ -20,6 +23,7 @@
 </head>
 <body>
     
+    <!-- * trick* ข้อมูลใน input เรียกว่า value -->
     <div class="container">
         <div class="row justify-content-center mt-5">
             <div class="col-md-8">
@@ -30,10 +34,11 @@
                         </div>
                     </div>
                     <div class="card-body">
+
                         <form action="php/update.php" method="post">
                             <div class="form-gruop">
                                 <label for="username">Username</label>
-                                <input type="text" class="form-control" name="username" id="username" value="<?php echo $row['username']; ?>" required>
+                                <input type="text" class="form-control" name="username" id="username" value="<?php echo $row['username']; ?>" required> <!-- เอาข้อมูลที่เรา fetch_assoc ออกมายัดใส่ใน value(ข้อมูลในช่อง input) -->
                             </div>
                             <div class="form-row">
                                 <div class="col">
@@ -51,8 +56,8 @@
                             </div>
                             <div class="form-gruop">
                                 <label for="province">จังหวัด</label>
-                                <select name="province" class="form-control" id="province" value="<?php echo $row['province']; ?> required>
-                                    <option value="เชียงใหม่" <?php echo $row['province'] == 'เชียงใหม่' ?  'selected' : '' ; ?>>เชียงใหม่</option>
+                                <select name="province" class="form-control" id="province" value="<?php echo $row['province']; ?>" required>
+                                    <option value="เชียงใหม่" <?php echo $row['province'] == 'เชียงใหม่' ?  'selected' : '' ; ?>>เชียงใหม่</option> <!-- short if มาจาก if รูปแบบเต็ม(อ่านต่อล่างสุด)-->
                                     <option value="กรุงเทพ" <?php echo $row['province'] == 'กรุงเทพ' ?  'selected' : '' ; ?>>กรุงเทพ</option>
                                     <option value="ชลบุรี" <?php echo $row['province'] == 'ชลบุรี' ?  'selected' : '' ; ?>>ชลบุรี</option>
                                     <option value="สมุทรปราการ" <?php echo $row['province'] == 'สมุทรปราการ' ?  'selected' : '' ; ?>>สมุทรปราการ</option>
@@ -63,6 +68,7 @@
                                 <input type="submit" name="submit" class="btn btn-success" value="แก้ไข">
                             </div>
                         </form>
+
                     </div>
                 </div>
             </div>
@@ -74,3 +80,14 @@
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+<?php
+    // if เขียนรูปแบบเต็ม
+
+    // if($row['province'] == 'เชียงใหม่'){    // ถ้า $row['province'] เท่ากับ "เชียงใหม่" ให้มัน echo คำว่า selected ออกมา
+    //     echo "selected";
+    // }   
+    // else{                                 // ถ้า $row['province'] ไม่เท่ากับ เชียงใหม่ ก็คือมันเท่ากับค่าอื่นๆ นั่นเอง ให้มัน echo ค่าว่างออกมา
+    //     echo '';
+    // }
+?>

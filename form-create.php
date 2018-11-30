@@ -20,10 +20,11 @@
                         </div>
                     </div>
                     <div class="card-body">
+                        
                         <form action="php/insert.php" method="post">
                             <div class="form-gruop">
                                 <label for="username">Username</label>
-                                <input type="text" class="form-control" name="username" id="username" required>
+                                <input type="text" class="form-control" name="username" id="username" required> <!-- ใส่ required เพื่อบังคับให้ user กรอกข้อมูล กันโค้ด error -->
                             </div>
                             <div class="form-gruop">
                                 <label for="password">Password</label>
@@ -56,6 +57,7 @@
                                 <input type="submit" name="submit" class="btn btn-success" value="เพิ่มข้อมูล">
                             </div>
                         </form>
+
                     </div>
                 </div>
             </div>
